@@ -1,7 +1,7 @@
 package cn.com.xuxiaowei.client;
 
 import cn.com.xuxiaowei.web.service.WebServicesTestService;
-import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import cn.com.xuxiaowei.web.service.util.CxfClientUtils;
 import org.junit.Test;
 
 /**
@@ -24,10 +24,7 @@ public class CxfClientTests {
 
     @Test
     public void jaxWsProxyFactoryBean() {
-        JaxWsProxyFactoryBean jaxWsProxyFactoryBean = new JaxWsProxyFactoryBean();
-        jaxWsProxyFactoryBean.setAddress(address);
-        jaxWsProxyFactoryBean.setServiceClass(WebServicesTestService.class);
-        WebServicesTestService webServicesTestService = (WebServicesTestService) jaxWsProxyFactoryBean.create();
+        WebServicesTestService webServicesTestService = CxfClientUtils.create(address, WebServicesTestService.class);
         String result = webServicesTestService.hiWebService(username);
         System.out.println("返回结果：" + result);
     }
